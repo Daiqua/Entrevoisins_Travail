@@ -5,147 +5,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.neighbour_list.NeighbourDetailsActivity"
-    tools:showIn="@layout/activity_list_neighbour"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:outlineAmbientShadowColor="@color/green"
-        >
+        android:orientation="vertical">
 
-        <android.support.constraint.ConstraintLayout
+        <include layout="@layout/activity_neighbour_details_collapsingtoolbar"/>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/contact_cardview"
+            app:cardCornerRadius="20dp"
+            app:cardMaxElevation="2dp"
+            android:padding="20dp"
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
-            android:layout_height="500dp">
+            android:layout_height="800dp"
+            android:outlineAmbientShadowColor="@color/black">
 
-            <ImageView
-                android:id="@+id/activity_neighbour_details_avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                tools:ignore="MissingConstraints"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <Button
-                android:id="@+id/activity_neighbour_details_favorite_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Favorite"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/activity_neighbour_details_avatar"
-                app:layout_constraintBottom_toBottomOf="@id/activity_neighbour_details_avatar"
-                tools:ignore="MissingConstraints" />
-
-            <Button
-                android:id="@+id/activity_neighbour_details_return_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Return"
-                app:layout_constraintStart_toStartOf="@id/activity_neighbour_details_avatar"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                tools:ignore="MissingConstraints"/>
-
-            <TextView
-                android:id="@+id/activity_neighbour_details_picture_name"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginBottom="40dp"
-                android:text="name"
-                android:textSize="45sp"
-                android:textColor="@color/white"
-                android:gravity="center_vertical"
-                app:layout_constraintStart_toStartOf="@id/activity_neighbour_details_avatar"
-                app:layout_constraintBottom_toBottomOf="@id/activity_neighbour_details_avatar"/>
-
-        </android.support.constraint.ConstraintLayout>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/contact_cardview"
-                app:cardCornerRadius="20dp"
-                app:cardMaxElevation="2dp"
-                android:padding="20dp"
-                android:layout_margin="20dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:outlineAmbientShadowColor="@color/black">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/activity_neighbour_details_name"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="name"
+                    android:textSize="45sp"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
 
-                    <TextView
-                        android:id="@+id/activity_neighbour_details_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="name"
-                        android:textSize="45sp"
-                        android:textColor="@color/black"
-                        android:gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/activity_neighbour_details_localisation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="localisation"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"/>
 
-                    <TextView
-                        android:id="@+id/activity_neighbour_details_localisation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="localisation"
-                        android:textSize="25sp"
-                        android:gravity="center_vertical"/>
-
-                    <TextView
-                        android:id="@+id/activity_neighbour_details_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="phone"
-                        android:textSize="25sp"
-                        android:gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/activity_neighbour_details_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="phone"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"/>
 
 
-                    <TextView
-                        android:id="@+id/activity_neighbour_details_url"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="url"
-                        android:textSize="25sp"
-                        android:gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/activity_neighbour_details_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="url"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical"/>
 
-                </LinearLayout>
+            </LinearLayout>
 
 
-            </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/aboutme_cardview"
                 app:cardCornerRadius="10dp"
                 app:cardMaxElevation="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="800dp"
                 android:padding="20dp"
                 android:layout_margin="20dp"
-                android:outlineAmbientShadowColor="@color/cardview_dark_background">
+                android:outlineAmbientShadowColor="@color/black">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -184,5 +134,7 @@
 
 
     </LinearLayout>
+
+
 
 </android.support.v4.widget.NestedScrollView>

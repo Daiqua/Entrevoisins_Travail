@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.neighbour_list.ListNeighbourActivity">
 
-    //added by Yoann
+    <!-- added by Yoann -->
     <android.support.v4.view.ViewPager
         android:id="@+id/profile_container"
         android:layout_width="match_parent"

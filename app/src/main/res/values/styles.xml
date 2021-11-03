@@ -17,4 +17,19 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- added by Yoann -->
+
+    <style name="ExpandedAppBar">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="CollapsedAppBar">
+        <item name="android:textSize">45sp</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+
+
+
 </resources>
