@@ -32,4 +32,7 @@ public interface NeighbourApiService {
      */
     void createNeighbour(Neighbour neighbour);
 
+    //TODO: ajouter la m"thodes setfavoris pour faciliter les test unitaire
+    //TODO: ajouter une méthode qui retourne la liste des favoris
+
 }

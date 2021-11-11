@@ -27,7 +27,8 @@ public class NeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-
+    private int mPosition;
+    private static String KEY_POSITION = "position" ;
     //added by Yoann to manage the different pages
     //private static final String KEY_POSITION="position";
 
@@ -37,15 +38,16 @@ public class NeighbourFragment extends Fragment {
      */
 
     // int position added by Yoann to link with bundle arg - removed
-    public static NeighbourFragment newInstance() {
+    public static NeighbourFragment newInstance(int position) {
         NeighbourFragment fragment = new NeighbourFragment();
 
+
         //added by Yoann to manage the different pages
-        /*
+
         Bundle args = new Bundle();
-        args.putInt(KEY_POSITION, 1);
+        args.putInt(KEY_POSITION, position);
         fragment.setArguments(args);
-        */
+
 
         return fragment;
     }
@@ -54,6 +56,9 @@ public class NeighbourFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
+        Bundle bundle=getArguments();
+        mPosition = bundle.getInt(KEY_POSITION);
+
 
 
     }
@@ -74,8 +79,14 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
+        ;
+        if (mPosition==0){
+            mNeighbours = mApiService.getNeighbours();
+        }else {
+            mNeighbours = mApiService.getFavoriteNeighbours();
+        }
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+
     }
 
     @Override

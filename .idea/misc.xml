@@ -8,11 +8,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/drawable/baseline_star_rate_lime_a200_24dp.xml" value="0.1" />
+        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/drawable/baseline_star_rate_yellow_700_48dp.xml" value="0.1" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/activity_add_neighbour.xml" value="0.2015625" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/activity_details_neighbour.xml" value="0.36041666666666666" />
-        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/activity_list_neighbour.xml" value="0.25" />
+        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/activity_list_neighbour.xml" value="0.1" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/activity_neighbour_details.xml" value="0.22" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/activity_neighbour_details_collapsingtoolbar.xml" value="0.1" />
+        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/favorite_button.xml" value="0.1" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/fragment_blank.xml" value="0.36041666666666666" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/fragment_favorites.xml" value="0.2015625" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/fragment_favorites_neighbour.xml" value="0.1" />
@@ -21,6 +24,8 @@
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/fragment_neighbour_list.xml" value="0.2015625" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/fragment_neighbour_profile.xml" value="0.25" />
         <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/fragment_profile_neighbour.xml" value="0.1" />
+        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/test.xml" value="0.36041666666666666" />
+        <entry key="..\:/Entrevoisins_Travail/app/src/main/res/layout/toolbar.xml" value="0.36041666666666666" />
       </map>
     </option>
   </component>
