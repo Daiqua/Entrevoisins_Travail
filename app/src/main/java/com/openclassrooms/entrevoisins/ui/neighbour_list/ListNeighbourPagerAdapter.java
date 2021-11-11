@@ -25,7 +25,7 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
     //Modified by Yoann: added a second page and if condition to define what page to show
     public Fragment getItem(int position) {
-        mFragment = NeighbourFragment.newInstance();
+       mFragment = NeighbourFragment.newInstance(position);
         return mFragment;
 
         /*if(position==0)
@@ -47,7 +47,7 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return (2); //pourquoi des parentheses?
+        return 2; //pourquoi des parentheses?
     }
 
 }

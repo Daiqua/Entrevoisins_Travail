@@ -2,9 +2,13 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,9 +44,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @BindView(R.id.activity_neighbour_details_description_text)
     TextView mAboutMeText;
     @BindView(R.id.collapsing_toolbar_favorite_button)
-    Button mFavoriteButton;
-    @BindView(R.id.collapsing_toolbar_return_button)
-    Button mReturnButton;
+    FloatingActionButton mFavoriteButton;
     @BindView(R.id.collapsing_toolbar_avatar)
     ImageView mAvatar;
 
@@ -57,64 +59,80 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_neighbour_details);
+        setContentView(R.layout.activity_neighbour_details_collapsingtoolbar);
+
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
 
         //collapsing toolbar creation
-        Toolbar toolbar = (Toolbar) findViewById(R.id.collapsing_toolbar);
+        Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
 
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
-        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
-        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
-        collapsingToolbarLayout.setContentScrimColor(Color.RED);
+        //added by Yoann to go back home
+        //TODO: review the back arrow thickness
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
         ButterKnife.bind(this);
-
-
-
 
         //TODO: simplify with genson
 
         neighbourPosition = getIntent().getExtras().getInt("position");
 
+        //TODO: faire le tri
         //generate the same list than the RecyclerView of NeighbourFragment
-
         mApiService = DI.getNeighbourApiService();
         mNeighbours = mApiService.getNeighbours();
         mNeighbour = mNeighbours.get(neighbourPosition);
 
         //load the user data
-
         String name = mNeighbour.getName();
 
-        //collaspsing data update
+       // mFavoriteButton.bringToFront();
+
         collapsingToolbarLayout.setTitle(name);
 
         //cardviews data update
+
         Glide.with(this)
                 .load(mNeighbour.getAvatarUrl())
                 .centerCrop()
                 .into(mAvatar);
+
+
+
+
         mName.setText(name);
         mLocalisation.setText(mNeighbour.getAddress());
         mPhone.setText(mNeighbour.getPhoneNumber());
+
+        //TODO: créer ou récupérer les Url
         //mUrl.setText(mNeighbour.getUrl);
         mUrl.setText("TBD");
+
         mAboutMeText.setText(mNeighbour.getAboutMe());
+
+
 
         isFavorite = mNeighbour.getIsFavorite();
 
-        mReturnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent listNeighbourActivityIntent = new Intent(view.getContext(), ListNeighbourActivity.class);
-                view.getContext().startActivity(listNeighbourActivityIntent);
-            }
-        });
+        Drawable favoriteOn = getResources().getDrawable(R.drawable.baseline_star_rate_yellow_700_48dp);
+        Drawable favoriteOff = getResources().getDrawable(R.drawable.round_star_rate_grey_600_48dp);
+
+        if (isFavorite){
+            mFavoriteButton.setImageDrawable(favoriteOn);
+        }else{
+            mFavoriteButton.setImageDrawable(favoriteOff);
+        }
+
+        //TODO: déplacer le bouton + mettre une étoile + gérer la méthode via l'API
 
         mFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //TODO: faire appel à une méthode dans l'API
 
                 if (isFavorite) {
                     mNeighbour.setIsFavorite(false);
@@ -125,5 +143,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), "Favoris set to:" + isFavorite, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
 }
