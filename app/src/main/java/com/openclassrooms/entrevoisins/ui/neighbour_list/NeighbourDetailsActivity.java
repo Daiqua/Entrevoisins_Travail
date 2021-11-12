@@ -67,7 +67,6 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         //added by Yoann to go back home
         //TODO: review the back arrow thickness
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
 
@@ -82,6 +81,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         //generate the same list than the RecyclerView of NeighbourFragment
         mApiService = DI.getNeighbourApiService();
         mNeighbours = mApiService.getNeighbours();
+        //TODO prendre la bonne liste - Créer un énum et la passer dans l'intent
         mNeighbour = mNeighbours.get(neighbourPosition);
 
 

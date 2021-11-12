@@ -71,6 +71,13 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
+        //added by Yoann for UI test
+        if(mPosition == 0){
+            view.setContentDescription("firstPage");
+        }else{
+            view.setContentDescription("secondPage");
+        }
+
         return view;
     }
 

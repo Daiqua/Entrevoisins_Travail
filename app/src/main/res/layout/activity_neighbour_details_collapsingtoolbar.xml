@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.neighbour_list.NeighbourDetailsActivity"
+    android:id="@+id/activity_neighbour_details_id"
     android:fitsSystemWindows="true">
 
 
@@ -74,7 +75,6 @@
         app:borderWidth="0dp"
         app:maxImageSize="56dp"
         app:fabCustomSize="80dp"
-
 >
 
 

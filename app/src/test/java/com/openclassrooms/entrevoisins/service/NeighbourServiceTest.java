@@ -45,6 +45,7 @@ public class NeighbourServiceTest {
     }
 
     //following tests added by Yoann
+    //TODO: redo with only few neighbour as set as favorite
     @Test
     public void getFavoriteNeighboursWithSuccess() {
         List<Neighbour> neighbours = service.getNeighbours();
@@ -64,9 +65,11 @@ public class NeighbourServiceTest {
         neighbours = service.getNeighbours();
         int b = neighbours.size();
         assertEquals(a+1,b);
+
     }
 
     @Test
+    //TODO: clear fav - set one neighbour fav - check fav list size
     public void setFavoriteNeighboursWithSuccess() {
         List<Neighbour> neighbours = service.getNeighbours();
         neighbours.clear();
@@ -75,7 +78,9 @@ public class NeighbourServiceTest {
         service.setFavorite(neighbours.get(0));
         assertEquals(neighbours.size(),1);
         assertEquals(neighbours.get(0).getIsFavorite(),true);
+        assertEquals(neighbours.get(0).getId(),100);
         service.setFavorite(neighbours.get(0));
         assertEquals(neighbours.get(0).getIsFavorite(),false);
+        assertEquals(neighbours.get(0).getId(),100);
     }
 }

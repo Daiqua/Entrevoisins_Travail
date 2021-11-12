@@ -57,9 +57,9 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     //added by Yoann
     public void setFavorite(Neighbour neighbour) {
-        mNeighbour=neighbour;
-        if (mNeighbour.getIsFavorite()) {mNeighbour.setIsFavorite(false);
-        }else {mNeighbour.setIsFavorite(true);}
+
+        if (neighbour.getIsFavorite()) {neighbour.setIsFavorite(false);
+        }else {neighbour.setIsFavorite(true);}
     }
 
 }

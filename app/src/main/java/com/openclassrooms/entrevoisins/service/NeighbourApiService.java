@@ -36,7 +36,5 @@ public interface NeighbourApiService {
     //added by Yoann
     void setFavorite(Neighbour neighbour);
 
-    //TODO: ajouter la m"thodes setfavoris pour faciliter les test unitaire
-
 
 }
