@@ -11,7 +11,7 @@ import java.util.List;
 public class DummyNeighbourApiService implements  NeighbourApiService {
 
     //added by Yoann: new... to instantiate before clear()
-    private List<Neighbour> neighbours;
+    private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
     Neighbour mNeighbour;
 
     //added by Yoann to test generateFavoriteNeighbours
@@ -23,7 +23,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     @Override
     public List<Neighbour> getNeighbours() {
         //added by Yoann: clear() to not set favorite in not updated list
-        neighbours = DummyNeighbourGenerator.generateNeighbours();
         return neighbours;
     }
 

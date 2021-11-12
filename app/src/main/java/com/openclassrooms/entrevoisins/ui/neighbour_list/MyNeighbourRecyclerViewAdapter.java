@@ -44,8 +44,6 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> implements Serializable {
 
     private final List<Neighbour> mNeighbours;
-    private NeighbourApiService mApiService;
-    private Neighbour mNeighbour;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
         mNeighbours = items;
@@ -54,26 +52,25 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_neighbour, parent, false);
+                .inflate(R.layout.fragment_neighbour,parent , false);
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        mNeighbour = mNeighbours.get(position);
-        holder.mNeighbourName.setText(mNeighbour.getName());
-
+        Neighbour neighbour = mNeighbours.get(position);
+        holder.mNeighbourName.setText(neighbour.getName());
         Glide.with(holder.mNeighbourAvatar.getContext())
-                .load(mNeighbour.getAvatarUrl())
+                .load(neighbour.getAvatarUrl())
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: what to do about EventBus?
-                //EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-                mApiService.deleteNeighbour(mNeighbour);
+                //TODO: what's about EventBus?
+                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
 
             }
         });
@@ -101,9 +98,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         public TextView mNeighbourName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
-        @BindView(R.id.item_list_favoriteCheck)
-        public TextView favoriteCheck;
-
 
 
         public ViewHolder(View view) {

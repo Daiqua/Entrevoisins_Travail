@@ -28,17 +28,6 @@
         app:layout_constraintStart_toEndOf="@+id/item_list_avatar"
         app:layout_constraintTop_toTopOf="@+id/item_list_avatar" />
 
-    //added by Yoann for test
-    <TextView
-        android:id="@+id/item_list_favoriteCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_avatar"
-        app:layout_constraintStart_toEndOf="@+id/item_list_name"
-        app:layout_constraintTop_toTopOf="@+id/item_list_avatar" />
-
     <ImageButton
         android:id="@+id/item_list_delete_button"
         android:layout_width="wrap_content"
