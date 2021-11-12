@@ -31,25 +31,17 @@ public class ListNeighbourActivity extends AppCompatActivity {
 
     ListNeighbourPagerAdapter mPagerAdapter;
 
-    static NeighbourFragment mNeighbourFragment;
-   // static FavoritesFragment mFavoritesFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_list_neighbour);
         ButterKnife.bind(this);
-
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
-
         mViewPager.setAdapter(mPagerAdapter);
-
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-
     }
 
     @Override
@@ -62,12 +54,4 @@ public class ListNeighbourActivity extends AppCompatActivity {
         AddNeighbourActivity.navigate(this);
     }
 
-    public static NeighbourFragment getNeighbourFragment() {
-        return mNeighbourFragment;
-    }
-
-    /*
-   static public FavoritesFragment getFavoritesFragment() {
-        return mFavoritesFragment;
-    }*/
 }

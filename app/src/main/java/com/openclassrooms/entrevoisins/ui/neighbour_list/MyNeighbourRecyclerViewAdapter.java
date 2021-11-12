@@ -24,8 +24,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.owlike.genson.Genson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -42,7 +44,8 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> implements Serializable {
 
     private final List<Neighbour> mNeighbours;
-
+    private NeighbourApiService mApiService;
+    private Neighbour mNeighbour;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
         mNeighbours = items;
@@ -57,22 +60,21 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Neighbour neighbour = mNeighbours.get(position);
-        holder.mNeighbourName.setText(neighbour.getName());
-
-        //added By Yoann to check favorite status - to remove before production
-        holder.favoriteCheck.setText(String.valueOf(neighbour.getIsFavorite()));
-
+        mNeighbour = mNeighbours.get(position);
+        holder.mNeighbourName.setText(mNeighbour.getName());
 
         Glide.with(holder.mNeighbourAvatar.getContext())
-                .load(neighbour.getAvatarUrl())
+                .load(mNeighbour.getAvatarUrl())
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+                //TODO: what to do about EventBus?
+                //EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+                mApiService.deleteNeighbour(mNeighbour);
+
             }
         });
 
@@ -82,11 +84,9 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
                 Intent intent = new Intent(holder.itemView.getContext(), NeighbourDetailsActivity.class);
                 intent.putExtra("position",position);
-
                 holder.itemView.getContext().startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -111,11 +111,4 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             ButterKnife.bind(this, view);
         }
     }
-
-    /*
-    //added by Yoann for Genson
-    public static String getNeighourtransfered() {
-        return mNeighourTransfered;
-    }
-     */
 }

@@ -16,6 +16,7 @@ public interface NeighbourApiService {
      */
     List<Neighbour> getNeighbours();
 
+    //TODO removale?
     //added by Yoann
     List<Neighbour> getFavoriteNeighbours();
 
@@ -32,7 +33,10 @@ public interface NeighbourApiService {
      */
     void createNeighbour(Neighbour neighbour);
 
+    //added by Yoann
+    void setFavorite(Neighbour neighbour);
+
     //TODO: ajouter la m"thodes setfavoris pour faciliter les test unitaire
-    //TODO: ajouter une méthode qui retourne la liste des favoris
+
 
 }

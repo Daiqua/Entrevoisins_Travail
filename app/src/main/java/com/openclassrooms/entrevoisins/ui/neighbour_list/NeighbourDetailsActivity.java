@@ -48,9 +48,6 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @BindView(R.id.collapsing_toolbar_avatar)
     ImageView mAvatar;
 
-
-    private boolean isFavorite=false;
-
     private int neighbourPosition;
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
@@ -81,69 +78,48 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         neighbourPosition = getIntent().getExtras().getInt("position");
 
         //TODO: faire le tri
+        //TODO: do not generate a new list
         //generate the same list than the RecyclerView of NeighbourFragment
         mApiService = DI.getNeighbourApiService();
         mNeighbours = mApiService.getNeighbours();
         mNeighbour = mNeighbours.get(neighbourPosition);
 
-        //load the user data
+
         String name = mNeighbour.getName();
-
-       // mFavoriteButton.bringToFront();
-
         collapsingToolbarLayout.setTitle(name);
 
         //cardviews data update
-
         Glide.with(this)
                 .load(mNeighbour.getAvatarUrl())
                 .centerCrop()
                 .into(mAvatar);
-
-
-
-
         mName.setText(name);
         mLocalisation.setText(mNeighbour.getAddress());
         mPhone.setText(mNeighbour.getPhoneNumber());
-
         //TODO: créer ou récupérer les Url
         //mUrl.setText(mNeighbour.getUrl);
         mUrl.setText("TBD");
-
         mAboutMeText.setText(mNeighbour.getAboutMe());
+        //load the favorite button picture
+        setFavoriteIconDrawable(mNeighbour.getIsFavorite());
 
+        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mApiService.setFavorite(mNeighbour);
+                setFavoriteIconDrawable(mNeighbour.getIsFavorite());
+            }
+        });
+    }
 
-
-        isFavorite = mNeighbour.getIsFavorite();
-
+    //Define favorite button appearance
+    void setFavoriteIconDrawable(boolean isFavorite){
         Drawable favoriteOn = getResources().getDrawable(R.drawable.baseline_star_rate_yellow_700_48dp);
         Drawable favoriteOff = getResources().getDrawable(R.drawable.round_star_rate_grey_600_48dp);
-
         if (isFavorite){
             mFavoriteButton.setImageDrawable(favoriteOn);
         }else{
             mFavoriteButton.setImageDrawable(favoriteOff);
         }
-
-        //TODO: déplacer le bouton + mettre une étoile + gérer la méthode via l'API
-
-        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //TODO: faire appel à une méthode dans l'API
-
-                if (isFavorite) {
-                    mNeighbour.setIsFavorite(false);
-                } else {
-                    mNeighbour.setIsFavorite(true);
-                }
-                isFavorite = mNeighbour.getIsFavorite();
-                Toast.makeText(view.getContext(), "Favoris set to:" + isFavorite, Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
-
 }

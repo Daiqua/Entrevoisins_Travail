@@ -10,7 +10,7 @@ public abstract class DummyNeighbourGenerator {
 
     //added by Yoann -> int isFavorite=0
     //added by Yoann -> for favorite list
-    //public static List<Neighbour> DUMMY_FAVORITE_NEIGHBOURS;
+    private Neighbour mNeighbour;
 
     public static List<Neighbour> DUMMY_NEIGHBOURS = Arrays.asList(
             new Neighbour(1, "Caroline", "https://i.pravatar.cc/150?u=a042581f4e29026704d", "Saint-Pierre-du-Mont ; 5km",
@@ -39,36 +39,9 @@ public abstract class DummyNeighbourGenerator {
                     "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..",false)
     );
 
-    //added by Yoann to test generateFavoriteNeighbours
-    /*
-    public static List<Neighbour> DUMMY_FAVORITE_NEIGHBOURS = Arrays.asList(
-            new Neighbour(1, "Caroline", "https://i.pravatar.cc/150?u=a042581f4e29026704d", "Saint-Pierre-du-Mont ; 5km",
-                    "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..",true),
-            new Neighbour(2, "Jack", "https://i.pravatar.cc/150?u=a042581f4e29026704e", "Saint-Pierre-du-Mont ; 5km",
-                    "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..",false),
-            new Neighbour(3, "Chloé", "https://i.pravatar.cc/150?u=a042581f4e29026704f", "Saint-Pierre-du-Mont ; 5km",
-                    "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..",false),
-            new Neighbour(4, "Vincent", "https://i.pravatar.cc/150?u=a042581f4e29026704a", "Saint-Pierre-du-Mont ; 5km",
-                    "+33 6 86 57 90 14",  "Bonjour !Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner !J'aime les jeux de cartes tels la belote et le tarot..",false)
-    );*/
-
     static List<Neighbour> generateNeighbours() {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
     }
 
-    //added by Yoann to test generateFavoriteNeighbours
-    /*
-    static List<Neighbour> generateFavoriteNeighbours() {
-
-        //loop to load favorite neighbour
-        /*
-        for ( Neighbour neighbour : DUMMY_FAVORITE_NEIGHBOURS){
-            if (neighbour.getIsFavorite()==false){DUMMY_FAVORITE_NEIGHBOURS.remove(neighbour);}
-            else {continue;}
-        }
-        //DUMMY_FAVORITE_NEIGHBOURS.remove(1);
-
-        return new ArrayList<>(DUMMY_FAVORITE_NEIGHBOURS);
-    }*/
 
 }

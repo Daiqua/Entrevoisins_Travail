@@ -23,21 +23,12 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
 
-    //Modified by Yoann: added a second page and if condition to define what page to show
+    //Modified by Yoann: added a second page and use position to define what list generate
+    //TODO: bug when click on the favortie list item. not the correct item is shown but item of the other list.
+    //TODO: bug when deleting on favorite list. Another neighbour appears.
     public Fragment getItem(int position) {
        mFragment = NeighbourFragment.newInstance(position);
         return mFragment;
-
-        /*if(position==0)
-            {
-                mFragment = ListNeighbourActivity.getNeighbourFragment();
-                return mFragment;
-        }else if (position==1)
-        {
-            mFragment = ListNeighbourActivity.getFavoritesFragment();
-            return mFragment;
-        }else
-            {return mFragment;}*/
 
     }
 
@@ -46,8 +37,6 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      * @return
      */
     @Override
-    public int getCount() {
-        return 2; //pourquoi des parentheses?
-    }
+    public int getCount() {return 2;}
 
 }
