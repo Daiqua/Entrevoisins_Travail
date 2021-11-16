@@ -1,41 +1,23 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
-import android.media.Image;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.NeighbourApiService;
-import com.owlike.genson.Genson;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,8 +27,15 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+    //added to manage list choice
+    private int positionForList;
+
+    //TODO: added to manage list choice: int position to know what list to display
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, int position) {
         mNeighbours = items;
+
+        //TODO: added to manage list choice
+        positionForList=position;
     }
 
     @Override
@@ -81,6 +70,10 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
                 Intent intent = new Intent(holder.itemView.getContext(), NeighbourDetailsActivity.class);
                 intent.putExtra("position",position);
+
+                //TODO: added to manage list choice
+                intent.putExtra("list_position",positionForList);
+
                 holder.itemView.getContext().startActivity(intent);
             }
         });

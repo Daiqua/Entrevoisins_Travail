@@ -53,6 +53,10 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     private List<Neighbour> mNeighbours;
     private Neighbour mNeighbour;
 
+    //TODO: added to manage list choice
+    private int positionForList;//putExtra name: list_position
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,23 +68,29 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
 
-        //added by Yoann to go back home
         //TODO: review the back arrow thickness
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         ButterKnife.bind(this);
 
-        //TODO: simplify with genson
-
         neighbourPosition = getIntent().getExtras().getInt("position");
+
+        //TODO: added to manage list choice
+        positionForList = getIntent().getExtras().getInt("list_position");
 
         //TODO: faire le tri
         //TODO: do not generate a new list
         //generate the same list than the RecyclerView of NeighbourFragment
         mApiService = DI.getNeighbourApiService();
-        mNeighbours = mApiService.getNeighbours();
+
+        //TODO: added to manage list choice
+        if (positionForList==0){
+            mNeighbours = mApiService.getNeighbours();
+        }else{
+            mNeighbours=mApiService.getFavoriteNeighbours();
+        }
+
+
         //TODO prendre la bonne liste - Créer un énum et la passer dans l'intent
         mNeighbour = mNeighbours.get(neighbourPosition);
 

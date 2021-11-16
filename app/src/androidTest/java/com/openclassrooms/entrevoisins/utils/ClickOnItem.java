@@ -5,7 +5,7 @@ import android.support.test.espresso.ViewAction;
 import android.view.View;
 import com.openclassrooms.entrevoisins.R;
 import org.hamcrest.Matcher;
-//TODO
+
 public class ClickOnItem implements ViewAction {
     @Override
     public Matcher<View> getConstraints() {

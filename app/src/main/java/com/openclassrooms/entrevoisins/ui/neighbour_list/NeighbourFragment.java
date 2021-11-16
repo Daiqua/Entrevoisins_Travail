@@ -86,12 +86,16 @@ public class NeighbourFragment extends Fragment {
      */
     private void initList() {
         //if loop to generate the appropriate list
+        int positionForList;
         if (mPosition==0){
             mNeighbours = mApiService.getNeighbours();
+            positionForList=0;
+
         }else {
             mNeighbours = mApiService.getFavoriteNeighbours();
+            positionForList=1;
         }
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, positionForList));
 
     }
 
