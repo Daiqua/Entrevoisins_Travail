@@ -43,43 +43,42 @@ public class NeighbourServiceTest {
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
 
-    //following tests added by Yoann
-    //TODO: redo with only few neighbour as set as favorite
+    //Following tests added by Yoann
     @Test
     public void getFavoriteNeighboursWithSuccess() {
         List<Neighbour> neighbours = service.getNeighbours();
-        for ( Neighbour neighbour : neighbours) {neighbour.setIsFavorite(true);}
         List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbours();
-        List<Neighbour> expectedNeighbours = neighbours;
-        assertThat(favoriteNeighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        int sizeBeforeSetSomeFavorites = favoriteNeighbours.size();
+        for ( int i=1; i<4; i++) {neighbours.get(i).setIsFavorite(true);}
+        favoriteNeighbours = service.getFavoriteNeighbours();
+        assertEquals(favoriteNeighbours.size(), sizeBeforeSetSomeFavorites + 3);
     }
 
     @Test
     public void CreateNeighbourWithSuccess() {
         List<Neighbour> neighbours = service.getNeighbours();
-        int a = neighbours.size();
+        int sizeBeforeAddingOneNeighbour = neighbours.size();
         Neighbour newNeighbour = new Neighbour(100, "", "", "",
                 "", "", false,"");
         service.createNeighbour(newNeighbour);
         neighbours = service.getNeighbours();
-        int b = neighbours.size();
-        assertEquals(a+1,b);
-
+        assertEquals(sizeBeforeAddingOneNeighbour+1,neighbours.size());
     }
 
     @Test
-    //TODO: clear fav - set one neighbour fav - check fav list size
     public void setFavoriteNeighboursWithSuccess() {
         List<Neighbour> neighbours = service.getNeighbours();
         neighbours.clear();
         neighbours.add(new Neighbour(100, "", "", "",
                 "", "", false,""));
+        //switch favorite from false to true
         service.setFavorite(neighbours.get(0));
-        assertEquals(neighbours.size(),1);
-        assertEquals(neighbours.get(0).getIsFavorite(),true);
+        //check the list contains only this neighbour
         assertEquals(neighbours.get(0).getId(),100);
+        //check Favorite status
+        assertEquals(neighbours.get(0).getIsFavorite(),true);
+        ///switch favorite from true to false and check
         service.setFavorite(neighbours.get(0));
         assertEquals(neighbours.get(0).getIsFavorite(),false);
-        assertEquals(neighbours.get(0).getId(),100);
     }
 }

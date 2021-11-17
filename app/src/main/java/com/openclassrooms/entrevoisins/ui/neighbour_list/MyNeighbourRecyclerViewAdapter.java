@@ -23,6 +23,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * positionForList will be used to indicate the list from where the item is coming.
+ * data coming from NeighbourFragment
+ */
+
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
@@ -47,7 +52,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     }
 
     /**
-     *
      * @param holder
      * @param position :
      */
@@ -70,7 +74,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         /**
          * This click listener will launch the details window.
          * needed parameters are sent via putExtra
-         * position: to define the position of the item in the appropriate list of neigbours
+         * position: to define the position of the item in the appropriate list of neighbours
          * positionForList: to define what list to use
          */
         holder.itemView.setOnClickListener(new View.OnClickListener() {

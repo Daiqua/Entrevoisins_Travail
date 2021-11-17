@@ -93,8 +93,6 @@ public class AddNeighbourActivity extends AppCompatActivity {
                 false, //added by Yoann: set isFavorite False by default
                 urlInput.getEditText().getText().toString() //TODO: check with Claire if an update is necessary to add edit Text
 
-
-
         );
         mApiService.createNeighbour(neighbour);
         finish();

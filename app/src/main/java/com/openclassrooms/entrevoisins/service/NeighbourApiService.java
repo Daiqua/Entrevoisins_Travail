@@ -4,7 +4,6 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import java.util.List;
 
-
 /**
  * Neighbour API client
  */
@@ -16,8 +15,10 @@ public interface NeighbourApiService {
      */
     List<Neighbour> getNeighbours();
 
-//TODO: add comment
-    //added by Yoann
+    /**
+     * Get only favorite Neighbours
+     * @return {@link List}
+     */
     List<Neighbour> getFavoriteNeighbours();
 
     /**
@@ -26,15 +27,15 @@ public interface NeighbourApiService {
      */
     void deleteNeighbour(Neighbour neighbour);
 
-
     /**
      * Create a neighbour
      * @param neighbour
      */
     void createNeighbour(Neighbour neighbour);
 
-    //added by Yoann
+    /**
+     * Switch favorite true or false
+     * @param neighbour
+     */
     void setFavorite(Neighbour neighbour);
-
-
 }

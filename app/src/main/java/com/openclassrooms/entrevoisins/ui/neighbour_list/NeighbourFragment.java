@@ -23,12 +23,14 @@ import java.util.List;
 
 
 public class NeighbourFragment extends Fragment {
-
+    /**
+     * Only this fragment will be used to generate neighbours tab and favorite neighbours tab
+     * mPosition & KEY_POSITION will be used to tag the fragment. This will be used during test
+     * mPosition will be used to generate the appropriate list of neighbours
+     */
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-
-    //added by Yoann to manage the different pages
     private int mPosition;
     private static String KEY_POSITION = "position" ;
 
@@ -37,14 +39,14 @@ public class NeighbourFragment extends Fragment {
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
+     * @param position: coming from the PagerAdapter
      */
 
-    // int position added by Yoann to link with bundle arg
     public static NeighbourFragment newInstance(int position) {
         NeighbourFragment fragment = new NeighbourFragment();
 
 
-        //added by Yoann to manage the different pages
+        //to manage the different pages
         Bundle args = new Bundle();
         args.putInt(KEY_POSITION, position);
         fragment.setArguments(args);
@@ -57,7 +59,7 @@ public class NeighbourFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
 
-        //added by Yoann to manage the different pages
+        //to manage the different pages
         Bundle bundle=getArguments();
         mPosition = bundle.getInt(KEY_POSITION);
     }
@@ -71,7 +73,7 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-        //added by Yoann for UI test
+        //to tag the fragment depending on the tab
         if(mPosition == 0){
             view.setContentDescription("firstPage");
         }else{
@@ -83,6 +85,8 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Init the List of neighbours
+     * positionForList will be used to indicate the list from where the item is coming.
+     * see the MyNeighbourRecyclerViewAdapter
      */
     private void initList() {
         //if loop to generate the appropriate list
