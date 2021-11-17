@@ -1,20 +1,14 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
@@ -28,7 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NeighbourDetailsActivity extends AppCompatActivity {
-
 
     // UI Components
     @BindView(R.id.activity_neighbour_details_name)
@@ -48,71 +41,63 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @BindView(R.id.collapsing_toolbar_avatar)
     ImageView mAvatar;
 
+    /**
+     * neighbourPosition will be fed with position of the item from RecyclerView
+     * mApiService and mNeighbours will be used to instantiate the same neighbours list which own the item clicked
+     * positionForList will be fed with the list_position (favorite list or not) from RecyclerView
+     */
     private int neighbourPosition;
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private Neighbour mNeighbour;
-
-    //TODO: added to manage list choice
-    private int positionForList;//putExtra name: list_position
-
+    private int positionForList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //creation of the layouts
         setContentView(R.layout.activity_neighbour_details_collapsingtoolbar);
-
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
-
-        //collapsing toolbar creation
         Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
-
-        //TODO: review the back arrow thickness
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//display the back arrow on the collapsing toolbar
         ButterKnife.bind(this);
 
+        //feed parameter to define what neighbours was clicked
         neighbourPosition = getIntent().getExtras().getInt("position");
-
-        //TODO: added to manage list choice
         positionForList = getIntent().getExtras().getInt("list_position");
-
-        //TODO: faire le tri
-        //TODO: do not generate a new list
-        //generate the same list than the RecyclerView of NeighbourFragment
+        //generate the appropriate list
         mApiService = DI.getNeighbourApiService();
-
-        //TODO: added to manage list choice
         if (positionForList==0){
             mNeighbours = mApiService.getNeighbours();
         }else{
             mNeighbours=mApiService.getFavoriteNeighbours();
         }
 
-
-        //TODO prendre la bonne liste - Créer un énum et la passer dans l'intent
+        //generate the neighbour
         mNeighbour = mNeighbours.get(neighbourPosition);
-
-
+        //update the layout with neighbour data
+        //name
         String name = mNeighbour.getName();
         collapsingToolbarLayout.setTitle(name);
-
-        //cardviews data update
+        mName.setText(name);
+        //avatar
         Glide.with(this)
                 .load(mNeighbour.getAvatarUrl())
                 .centerCrop()
                 .into(mAvatar);
-        mName.setText(name);
+        //adress
         mLocalisation.setText(mNeighbour.getAddress());
+        //phone
         mPhone.setText(mNeighbour.getPhoneNumber());
-        //TODO: créer ou récupérer les Url
-        //mUrl.setText(mNeighbour.getUrl);
-        mUrl.setText("TBD");
+        //Url
+        mUrl.setText(mNeighbour.getUrl());
+        //aboutMe
         mAboutMeText.setText(mNeighbour.getAboutMe());
-        //load the favorite button picture
+        //favorite button picture
         setFavoriteIconDrawable(mNeighbour.getIsFavorite());
 
+        /** click listener on favorite FAB to switch between true/false and update FAB picture */
         mFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,8 +106,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
             }
         });
     }
-
-    //Define favorite button appearance
+    /** @param isFavorite : used to choose the appropriate icon for favorite FAB */
     void setFavoriteIconDrawable(boolean isFavorite){
         Drawable favoriteOn = getResources().getDrawable(R.drawable.baseline_star_rate_yellow_700_48dp);
         Drawable favoriteOff = getResources().getDrawable(R.drawable.round_star_rate_grey_600_48dp);

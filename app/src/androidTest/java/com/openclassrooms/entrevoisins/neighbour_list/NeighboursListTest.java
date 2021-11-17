@@ -7,12 +7,10 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.ClickOnItem;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,9 +40,8 @@ import static org.hamcrest.core.IsNull.notNullValue;
 public class NeighboursListTest {
 
     // This is fixed
-    private static int ITEMS_COUNT = 12;
-    private static int FAVORITE_ITEMS_COUNTS = 2;
-    private NeighbourApiService mApiService;
+    private static final int ITEMS_COUNT = 12;
+    private static final int FAVORITE_ITEMS_COUNTS = 2;
 
     private ListNeighbourActivity mActivity;
 

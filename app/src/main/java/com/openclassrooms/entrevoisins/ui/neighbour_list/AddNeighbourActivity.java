@@ -35,6 +35,8 @@ public class AddNeighbourActivity extends AppCompatActivity {
     TextInputLayout addressInput;
     @BindView(R.id.aboutMeLyt)
     TextInputLayout aboutMeInput;
+    @BindView(R.id.urlLyt)
+    TextInputLayout urlInput;
     @BindView(R.id.create)
     MaterialButton addButton;
 
@@ -88,7 +90,10 @@ public class AddNeighbourActivity extends AppCompatActivity {
                 addressInput.getEditText().getText().toString(),
                 phoneInput.getEditText().getText().toString(),
                 aboutMeInput.getEditText().getText().toString(),
-                false //added by Yoann: set isFavorite False by default
+                false, //added by Yoann: set isFavorite False by default
+                urlInput.getEditText().getText().toString() //TODO: check with Claire if an update is necessary to add edit Text
+
+
 
         );
         mApiService.createNeighbour(neighbour);

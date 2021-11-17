@@ -26,18 +26,25 @@ public class Neighbour {
     /** About me */
     private String aboutMe;
 
-    //added by Yoann
+    /** Favorite */
     private boolean isFavorite;
+
+    /** Url */
     private String url;
 
     /**
-     * Constructor
+     *
      * @param id
      * @param name
      * @param avatarUrl
+     * @param address
+     * @param phoneNumber
+     * @param aboutMe
+     * @param isFavorite
+     * @param url --> //TODO: to be filled
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
-                     String phoneNumber, String aboutMe, boolean isFavorite) {
+                     String phoneNumber, String aboutMe, boolean isFavorite, String url) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;
@@ -45,6 +52,7 @@ public class Neighbour {
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
         this.isFavorite = isFavorite;
+        this.url = url;
     }
 
     public long getId() {
@@ -95,14 +103,20 @@ public class Neighbour {
         this.aboutMe = aboutMe;
     }
 
-
-    //added by Yoann
     public boolean getIsFavorite() {
         return isFavorite;
     }
 
     public void setIsFavorite(boolean isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

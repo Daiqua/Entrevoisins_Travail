@@ -16,7 +16,7 @@ public interface NeighbourApiService {
      */
     List<Neighbour> getNeighbours();
 
-    //TODO removale?
+//TODO: add comment
     //added by Yoann
     List<Neighbour> getFavoriteNeighbours();
 

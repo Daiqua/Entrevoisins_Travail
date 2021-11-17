@@ -28,7 +28,6 @@ public class NeighbourServiceTest {
         service = DI.getNewInstanceApiService();
     }
 
-    //TODO: improve modifying the setup to avoid repetition
 
     @Test
     public void getNeighboursWithSuccess() {
@@ -60,7 +59,7 @@ public class NeighbourServiceTest {
         List<Neighbour> neighbours = service.getNeighbours();
         int a = neighbours.size();
         Neighbour newNeighbour = new Neighbour(100, "", "", "",
-                "", "", false);
+                "", "", false,"");
         service.createNeighbour(newNeighbour);
         neighbours = service.getNeighbours();
         int b = neighbours.size();
@@ -74,7 +73,7 @@ public class NeighbourServiceTest {
         List<Neighbour> neighbours = service.getNeighbours();
         neighbours.clear();
         neighbours.add(new Neighbour(100, "", "", "",
-                "", "", false));
+                "", "", false,""));
         service.setFavorite(neighbours.get(0));
         assertEquals(neighbours.size(),1);
         assertEquals(neighbours.get(0).getIsFavorite(),true);

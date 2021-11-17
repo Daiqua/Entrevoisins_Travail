@@ -23,29 +23,34 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> implements Serializable {
+public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
-
-    //added to manage list choice
     private int positionForList;
 
-    //TODO: added to manage list choice: int position to know what list to display
+    /**
+     * @param items
+     * @param position : added to manage the tab selected when the item is clicked.
+     * This parameter will be sent with putExtra during the click listener with positionForList
+     */
+
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, int position) {
         mNeighbours = items;
-
-        //TODO: added to manage list choice
-        positionForList=position;
+        positionForList = position;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour,parent , false);
-
         return new ViewHolder(view);
     }
 
+    /**
+     *
+     * @param holder
+     * @param position :
+     */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Neighbour neighbour = mNeighbours.get(position);
@@ -58,31 +63,29 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: what's about EventBus?
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-
             }
         });
 
+        /**
+         * This click listener will launch the details window.
+         * needed parameters are sent via putExtra
+         * position: to define the position of the item in the appropriate list of neigbours
+         * positionForList: to define what list to use
+         */
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(holder.itemView.getContext(), NeighbourDetailsActivity.class);
                 intent.putExtra("position",position);
-
-                //TODO: added to manage list choice
                 intent.putExtra("list_position",positionForList);
-
                 holder.itemView.getContext().startActivity(intent);
             }
         });
     }
 
     @Override
-    public int getItemCount() {
-        return mNeighbours.size();
-    }
+    public int getItemCount() {return mNeighbours.size();}
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar)
