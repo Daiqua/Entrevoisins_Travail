@@ -13,13 +13,7 @@ public interface NeighbourApiService {
      * Get all my Neighbours
      * @return {@link List}
      */
-    List<Neighbour> getNeighbours();
-
-    /**
-     * Get only favorite Neighbours
-     * @return {@link List}
-     */
-    List<Neighbour> getFavoriteNeighbours();
+    List<Neighbour> getNeighbours(int position);
 
     /**
      * Deletes a neighbour

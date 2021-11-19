@@ -66,14 +66,9 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         //feed parameter to define what neighbours was clicked
         neighbourPosition = getIntent().getExtras().getInt("position");
         positionForList = getIntent().getExtras().getInt("list_position");
-        //generate the appropriate list
+        //generate the list
         mApiService = DI.getNeighbourApiService();
-        if (positionForList==0){
-            mNeighbours = mApiService.getNeighbours();
-        }else{
-            mNeighbours=mApiService.getFavoriteNeighbours();
-        }
-
+        mNeighbours = mApiService.getNeighbours(positionForList);
         //generate the neighbour
         mNeighbour = mNeighbours.get(neighbourPosition);
         //update the layout with neighbour data

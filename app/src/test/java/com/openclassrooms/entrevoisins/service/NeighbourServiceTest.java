@@ -22,6 +22,8 @@ import static org.junit.Assert.assertThat;
 public class NeighbourServiceTest {
 
     private NeighbourApiService service;
+    private final int neighboursTab = 0;
+    private final int favoriteTab = 1;
 
     @Before
     public void setup() {
@@ -31,43 +33,44 @@ public class NeighbourServiceTest {
 
     @Test
     public void getNeighboursWithSuccess() {
-        List<Neighbour> neighbours = service.getNeighbours();
+        List<Neighbour> neighbours = service.getNeighbours(neighboursTab);
         List<Neighbour> expectedNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
     }
 
     @Test
     public void deleteNeighbourWithSuccess() {
-        Neighbour neighbourToDelete = service.getNeighbours().get(0);
+        Neighbour neighbourToDelete = service.getNeighbours(neighboursTab).get(0);
         service.deleteNeighbour(neighbourToDelete);
-        assertFalse(service.getNeighbours().contains(neighbourToDelete));
+        assertFalse(service.getNeighbours(neighboursTab).contains(neighbourToDelete));
+        assertFalse(service.getNeighbours(favoriteTab).contains(neighbourToDelete));
     }
 
     //Following tests added by Yoann
     @Test
     public void getFavoriteNeighboursWithSuccess() {
-        List<Neighbour> neighbours = service.getNeighbours();
-        List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbours();
+        List<Neighbour> neighbours = service.getNeighbours(neighboursTab);
+        List<Neighbour> favoriteNeighbours = service.getNeighbours(favoriteTab);
         int sizeBeforeSetSomeFavorites = favoriteNeighbours.size();
         for ( int i=1; i<4; i++) {neighbours.get(i).setIsFavorite(true);}
-        favoriteNeighbours = service.getFavoriteNeighbours();
+        favoriteNeighbours = service.getNeighbours(favoriteTab);
         assertEquals(favoriteNeighbours.size(), sizeBeforeSetSomeFavorites + 3);
     }
 
     @Test
     public void CreateNeighbourWithSuccess() {
-        List<Neighbour> neighbours = service.getNeighbours();
+        List<Neighbour> neighbours = service.getNeighbours(neighboursTab);
         int sizeBeforeAddingOneNeighbour = neighbours.size();
         Neighbour newNeighbour = new Neighbour(100, "", "", "",
                 "", "", false,"");
         service.createNeighbour(newNeighbour);
-        neighbours = service.getNeighbours();
+        neighbours = service.getNeighbours(neighboursTab);
         assertEquals(sizeBeforeAddingOneNeighbour+1,neighbours.size());
     }
 
     @Test
     public void setFavoriteNeighboursWithSuccess() {
-        List<Neighbour> neighbours = service.getNeighbours();
+        List<Neighbour> neighbours = service.getNeighbours(neighboursTab);
         neighbours.clear();
         neighbours.add(new Neighbour(100, "", "", "",
                 "", "", false,""));

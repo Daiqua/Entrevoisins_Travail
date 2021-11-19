@@ -27,8 +27,8 @@ No licence.
 Download the application code at the following url:
 https://github.com/Daiqua/Entrevoisins_Travail
 
-Load it on Android Studio
-Once the application fully loaded, go to Run-->Run app
-If app does not appear, Run the file ListNeighbourActivity (app/java/ui.neighbour_list/)
+- Load it on Android Studio
+- Once the application fully loaded, go to Run-->Run app
+- If app does not appear, Run the file ListNeighbourActivity (app/java/ui.neighbour_list/)
 
 

@@ -87,20 +87,11 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      * positionForList will be used to indicate the list from where the item is coming.
      * see the MyNeighbourRecyclerViewAdapter
+     * mPosition enable to indicate the tab displayed to generate the appropriate list
      */
     private void initList() {
-        //if loop to generate the appropriate list
-        int positionForList;
-        if (mPosition==0){
-            mNeighbours = mApiService.getNeighbours();
-            positionForList=0;
-
-        }else {
-            mNeighbours = mApiService.getFavoriteNeighbours();
-            positionForList=1;
-        }
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, positionForList));
-
+        mNeighbours = mApiService.getNeighbours(mPosition);
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, mPosition));
     }
 
     @Override
