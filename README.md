@@ -4,14 +4,13 @@ Ce dépôt contient une mini-application pour le P3 du parcours **Grande École 
 
 # Entrevoisins : application to enable neighbours to help each others
 
-Entrevoisin aims at developing a easy application for android device to locate neighbours and enable the mutual help like pet sitting, DIY, material sharing, lesson,...
+Entrevoisin aims at developing an easy application for android device to locate neighbours and enable the mutual help like pet sitting, DIY, material sharing, lesson,...
 
 ## Technologies
+
 - Java
+- XML
 
-## Contribute to the project
-
-Entrevoisins is a proprietary project.
 
 ## Authors
 
@@ -24,11 +23,10 @@ No licence.
 
 ## Installation
 
-Download the application code at the following url:
+Download or clone the application code available at the following url:
 https://github.com/Daiqua/Entrevoisins_Travail
 
 - Load it on Android Studio
-- Once the application fully loaded, go to Run-->Run app
-- If app does not appear, Run the file ListNeighbourActivity (app/java/ui.neighbour_list/)
+- Once the application fully loaded, sync Gradle and go to Run-->Run app
 
 

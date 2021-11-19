@@ -87,7 +87,7 @@ public class NeighboursListTest {
                 .check(withItemCount(ITEMS_COUNT - 1));
         //click on tab 1 - Favorites
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage"))).perform(swipeLeft());
-        //Check tab 2 is displayed
+        //Check tab 1 is displayed
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
                 .check(matches(isDisplayed()));
         //check the number of items displayed
@@ -137,6 +137,7 @@ public class NeighboursListTest {
                 .check(matches(withText("Caroline")));
     }
     //TODO WITH Brahim: test not 100% ok. Sometimes, favorite button is not clicked
+    //TODO: ne vérifier que que la liste est incrémentée
     @Test
     public void FavoriteTabOfMyNeighbourList_shouldShowOnlyFavoriteNeighbour() {
 
