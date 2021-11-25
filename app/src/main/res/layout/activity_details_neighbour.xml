@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
+            android:id="@+id/activity_details_neighbour_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:expandedTitleGravity="bottom"
@@ -29,7 +29,7 @@
             android:fitsSystemWindows="true">
 
             <ImageView
-                android:id="@+id/collapsing_toolbar_avatar"
+                android:id="@+id/activity_details_neighbour_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_gravity="center_horizontal"
@@ -37,9 +37,9 @@
                 app:layout_collapseParallaxMultiplier="0.5"/>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/collapsing_toolbar"
+                android:id="@+id/activity_details_neighbour_collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="?android:actionBarSize"
                 app:title="name"
                 app:layout_collapseMode="pin"
                 android:background="@android:color/transparent"
@@ -49,11 +49,11 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/activity_neighbour_details"
+    <include layout="@layout/activity_neighbour_cardviews"
         android:id="@+id/cardviews"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/collapsing_toolbar_favorite_button"
+        android:id="@+id/activity_details_neighbour_favorite_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/cardviews"

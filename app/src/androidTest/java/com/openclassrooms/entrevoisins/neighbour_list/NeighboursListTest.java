@@ -41,7 +41,7 @@ public class NeighboursListTest {
 
     // This is fixed
     private static final int ITEMS_COUNT = 12;
-    private static final int FAVORITE_ITEMS_COUNTS = 2;
+    private static final int FAVORITE_ITEMS_COUNT = 2;
 
     private ListNeighbourActivity mActivity;
 
@@ -85,18 +85,18 @@ public class NeighboursListTest {
         // Then : the number of element is 11 of Neighbour tab (N°1)
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
                 .check(withItemCount(ITEMS_COUNT - 1));
-        //click on tab 1 - Favorites
+        //switch on tab 2 - Favorites
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage"))).perform(swipeLeft());
-        //Check tab 1 is displayed
+        //Check tab 2 is displayed
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
                 .check(matches(isDisplayed()));
         //check the number of items displayed
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage"))).check(withItemCount(FAVORITE_ITEMS_COUNTS));
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage"))).check(withItemCount(FAVORITE_ITEMS_COUNT));
         //click on delete icon of first item
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of item should be 1
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage"))).check(withItemCount(FAVORITE_ITEMS_COUNTS - 1));
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage"))).check(withItemCount(FAVORITE_ITEMS_COUNT - 1));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.activity_neighbour_details_id))
                 .check(matches(isDisplayed()));
         //check the name
-        onView(ViewMatchers.withId(R.id.activity_neighbour_details_name))
+        onView(ViewMatchers.withId(R.id.activity_neighbour_cardviews_name))
                 .check(matches(withText("Caroline")))
                 .perform(pressBack());
         //go to favorites tab
@@ -133,31 +133,41 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.activity_neighbour_details_id))
                 .check(matches(isDisplayed()));
         //check the name
-        onView(ViewMatchers.withId(R.id.activity_neighbour_details_name))
+        onView(ViewMatchers.withId(R.id.activity_neighbour_cardviews_name))
                 .check(matches(withText("Caroline")));
     }
     //TODO WITH Brahim: test not 100% ok. Sometimes, favorite button is not clicked
-    //TODO: ne vérifier que que la liste est incrémentée
     @Test
     public void FavoriteTabOfMyNeighbourList_shouldShowOnlyFavoriteNeighbour() {
 
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(4, new ClickOnItem()));
-        onView(ViewMatchers.withId(R.id.collapsing_toolbar_favorite_button))
-                .perform(click())
-                .check(matches(isDisplayed())); //
-        onView(withId(R.id.collapsing_toolbar))
+
+        //sleep added to avoid missed click
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(ViewMatchers.withId(R.id.activity_details_neighbour_favorite_button))
+                .perform(click());
+        onView(withId(R.id.activity_details_neighbour_collapsing_toolbar))
                 .perform(pressBack());
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("firstPage")))
                 .perform(swipeLeft());
-        // When perform a click a neighbour item n° 1
+        //Check one item has been added to favorite
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
+                .check(withItemCount(FAVORITE_ITEMS_COUNT));
+        // When perform a click a neighbour item n° 2
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new ClickOnItem()));
         // Then : the NeighbourDetailsActivity start
         onView(ViewMatchers.withId(R.id.activity_neighbour_details_id))
                 .check(matches(isDisplayed()));
         //check the name
-        onView(ViewMatchers.withId(R.id.activity_neighbour_details_name))
+        onView(ViewMatchers.withId(R.id.activity_neighbour_cardviews_name))
                 .check(matches(withText("Laetitia")));
+
     }
 }

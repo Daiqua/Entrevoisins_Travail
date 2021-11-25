@@ -24,21 +24,21 @@ import butterknife.ButterKnife;
 public class NeighbourDetailsActivity extends AppCompatActivity {
 
     // UI Components
-    @BindView(R.id.activity_neighbour_details_name)
+    @BindView(R.id.activity_neighbour_cardviews_name)
     TextView mName;
-    @BindView(R.id.activity_neighbour_details_localisation)
+    @BindView(R.id.activity_neighbour_cardviews_localisation)
     TextView mLocalisation;
-    @BindView(R.id.activity_neighbour_details_phone)
+    @BindView(R.id.activity_neighbour_cardviews_phone)
     TextView mPhone;
-    @BindView(R.id.activity_neighbour_details_url)
+    @BindView(R.id.activity_neighbour_cardviews_url)
     TextView mUrl;
-    @BindView(R.id.activity_neighbour_details_description_about_me)
+    @BindView(R.id.activity_neighbour_cardviews_description_about_me)
     TextView mAboutMeTitle;
-    @BindView(R.id.activity_neighbour_details_description_text)
+    @BindView(R.id.activity_neighbour_cardviews_description_text)
     TextView mAboutMeText;
-    @BindView(R.id.collapsing_toolbar_favorite_button)
+    @BindView(R.id.activity_details_neighbour_favorite_button)
     FloatingActionButton mFavoriteButton;
-    @BindView(R.id.collapsing_toolbar_avatar)
+    @BindView(R.id.activity_details_neighbour_avatar)
     ImageView mAvatar;
 
     /**
@@ -56,9 +56,9 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //creation of the layouts
-        setContentView(R.layout.activity_neighbour_details_collapsingtoolbar);
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
-        Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
+        setContentView(R.layout.activity_details_neighbour);
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.activity_details_neighbour_collapsing_toolbar_layout);
+        Toolbar toolbar = findViewById(R.id.activity_details_neighbour_collapsing_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//display the back arrow on the collapsing toolbar
         ButterKnife.bind(this);

@@ -21,6 +21,6 @@ public class ClickOnItem implements ViewAction {
     public void perform(UiController uiController, View view) {
         View itemView = view.findViewById(R.id.fragment_neighbour_id);
         // Maybe check for null
-        view.performClick();
+        itemView.performClick();
     }
 }
