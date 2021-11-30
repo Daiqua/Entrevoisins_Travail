@@ -7,6 +7,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.ClickOnItem;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
@@ -44,6 +47,7 @@ public class NeighboursListTest {
     private static final int FAVORITE_ITEMS_COUNT = 2;
 
     private ListNeighbourActivity mActivity;
+    private NeighbourApiService mApiService;
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
@@ -52,7 +56,9 @@ public class NeighboursListTest {
     @Before
     public void setUp() {
         mActivity = mActivityRule.getActivity();
+        mApiService = DI.getNewInstanceApiService();
         assertThat(mActivity, notNullValue());
+
     }
 
     /**
@@ -61,7 +67,6 @@ public class NeighboursListTest {
     @Test
 
     public void myNeighboursList_shouldNotBeEmpty() {
-
         // First scroll to the position that needs to be matched and click on it.
         //Modified by Yoann: added withContentDescription("firstPage")) + allOf to check what is ()
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("firstPage")))
@@ -108,7 +113,6 @@ public class NeighboursListTest {
         // Then : the NeighbourDetailsActivity start
         onView(ViewMatchers.withId(R.id.activity_neighbour_details_id))
                 .check(matches(isDisplayed()));
-        //check the name
     }
 
     @Test
@@ -142,14 +146,12 @@ public class NeighboursListTest {
 
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(4, new ClickOnItem()));
-
         //sleep added to avoid missed click
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         onView(ViewMatchers.withId(R.id.activity_details_neighbour_favorite_button))
                 .perform(click());
         onView(withId(R.id.activity_details_neighbour_collapsing_toolbar))
@@ -158,7 +160,7 @@ public class NeighboursListTest {
                 .perform(swipeLeft());
         //Check one item has been added to favorite
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
-                .check(withItemCount(FAVORITE_ITEMS_COUNT));
+                .check(withItemCount(FAVORITE_ITEMS_COUNT+1));
         // When perform a click a neighbour item n° 2
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new ClickOnItem()));
@@ -167,7 +169,6 @@ public class NeighboursListTest {
                 .check(matches(isDisplayed()));
         //check the name
         onView(ViewMatchers.withId(R.id.activity_neighbour_cardviews_name))
-                .check(matches(withText("Laetitia")));
-
+                .check(matches(withText("Elodie")));
     }
 }
