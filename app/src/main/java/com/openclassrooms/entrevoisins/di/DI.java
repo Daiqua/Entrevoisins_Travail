@@ -23,6 +23,7 @@ public class DI {
      * @return
      */
     public static NeighbourApiService getNewInstanceApiService() {
-        return service  = new DummyNeighbourApiService();
+        service  = new DummyNeighbourApiService();
+        return service;
     }
 }

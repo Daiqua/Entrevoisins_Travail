@@ -1,24 +1,6 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-
-import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.NeighbourApiService;
-import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
-import com.openclassrooms.entrevoisins.utils.ClickOnItem;
-import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
@@ -33,6 +15,23 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
+
+import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
+import com.openclassrooms.entrevoisins.utils.ClickOnItem;
+import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
 
