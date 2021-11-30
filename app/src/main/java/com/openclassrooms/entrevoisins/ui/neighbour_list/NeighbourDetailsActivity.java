@@ -40,6 +40,10 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     FloatingActionButton mFavoriteButton;
     @BindView(R.id.activity_details_neighbour_avatar)
     ImageView mAvatar;
+    @BindView(R.id.activity_details_neighbour_collapsing_toolbar_layout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.activity_details_neighbour_collapsing_toolbar)
+    Toolbar toolbar;
 
     /**
      * neighbourPosition will be fed with position of the item from RecyclerView
@@ -55,42 +59,8 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //creation of the layouts
-        setContentView(R.layout.activity_details_neighbour);
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.activity_details_neighbour_collapsing_toolbar_layout);
-        Toolbar toolbar = findViewById(R.id.activity_details_neighbour_collapsing_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//display the back arrow on the collapsing toolbar
-        ButterKnife.bind(this);
-
-        //feed parameter to define what neighbours was clicked
-        neighbourPosition = getIntent().getExtras().getInt("position");
-        positionForList = getIntent().getExtras().getInt("list_position");
-        //generate the list
-        mApiService = DI.getNeighbourApiService();
-        mNeighbours = mApiService.getNeighbours(positionForList);
-        //generate the neighbour
-        mNeighbour = mNeighbours.get(neighbourPosition);
-        //update the layout with neighbour data
-        //name
-        String name = mNeighbour.getName();
-        collapsingToolbarLayout.setTitle(name);
-        mName.setText(name);
-        //avatar
-        Glide.with(this)
-                .load(mNeighbour.getAvatarUrl())
-                .centerCrop()
-                .into(mAvatar);
-        //adress
-        mLocalisation.setText(mNeighbour.getAddress());
-        //phone
-        mPhone.setText(mNeighbour.getPhoneNumber());
-        //Url
-        mUrl.setText(mNeighbour.getUrl());
-        //aboutMe
-        mAboutMeText.setText(mNeighbour.getAboutMe());
-        //favorite button picture
-        setFavoriteIconDrawable(mNeighbour.getIsFavorite());
+        loadTheView();
+        loadAndDisplayNeighbourData();
 
         /** click listener on favorite FAB to switch between true/false and update FAB picture */
         mFavoriteButton.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +72,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         });
     }
     /** @param isFavorite : used to choose the appropriate icon for favorite FAB */
-    void setFavoriteIconDrawable(boolean isFavorite){
+    private void setFavoriteIconDrawable(boolean isFavorite){
         Drawable favoriteOn = getResources().getDrawable(R.drawable.baseline_star_rate_yellow_700_48dp);
         Drawable favoriteOff = getResources().getDrawable(R.drawable.round_star_rate_grey_600_48dp);
         if (isFavorite){
@@ -110,5 +80,38 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         }else{
             mFavoriteButton.setImageDrawable(favoriteOff);
         }
+    }
+
+    private void loadTheView(){
+        setContentView(R.layout.activity_details_neighbour);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//display the back arrow on the collapsing toolbar
+
+    }
+
+    private void loadAndDisplayNeighbourData(){
+        //feed parameter to define what neighbours was clicked
+        neighbourPosition = getIntent().getExtras().getInt("position");
+        positionForList = getIntent().getExtras().getInt("list_position");
+        //generate the list
+        mApiService = DI.getNeighbourApiService();
+        mNeighbours = mApiService.getNeighbours(positionForList);
+        //generate the neighbour
+        mNeighbour = mNeighbours.get(neighbourPosition);
+        //update the layout with neighbour data
+        String name = mNeighbour.getName();
+        collapsingToolbarLayout.setTitle(name);
+        mName.setText(name);
+        Glide.with(this)
+                .load(mNeighbour.getAvatarUrl())
+                .centerCrop()
+                .into(mAvatar);
+        mLocalisation.setText(mNeighbour.getAddress());
+        mPhone.setText(mNeighbour.getPhoneNumber());
+        mUrl.setText(mNeighbour.getUrl());
+        mAboutMeText.setText(mNeighbour.getAboutMe());
+        //favorite button picture
+        setFavoriteIconDrawable(mNeighbour.getIsFavorite());
     }
 }

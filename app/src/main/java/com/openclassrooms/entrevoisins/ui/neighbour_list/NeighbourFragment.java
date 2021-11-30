@@ -45,7 +45,6 @@ public class NeighbourFragment extends Fragment {
     public static NeighbourFragment newInstance(int position) {
         NeighbourFragment fragment = new NeighbourFragment();
 
-
         //to manage the different pages
         Bundle args = new Bundle();
         args.putInt(KEY_POSITION, position);
