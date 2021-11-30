@@ -140,7 +140,7 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.activity_neighbour_cardviews_name))
                 .check(matches(withText("Caroline")));
     }
-    //TODO WITH Brahim: test not 100% ok. Sometimes, favorite button is not clicked
+
     @Test
     public void FavoriteTabOfMyNeighbourList_shouldShowOnlyFavoriteNeighbour() {
 
