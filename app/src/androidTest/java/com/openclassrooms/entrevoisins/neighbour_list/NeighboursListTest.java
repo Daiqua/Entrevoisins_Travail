@@ -56,6 +56,7 @@ public class NeighboursListTest {
     public void setUp() {
         mActivity = mActivityRule.getActivity();
         mApiService = DI.getNewInstanceApiService();
+
         assertThat(mActivity, notNullValue());
 
     }
@@ -145,12 +146,6 @@ public class NeighboursListTest {
 
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(4, new ClickOnItem()));
-        //sleep added to avoid missed click
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         onView(ViewMatchers.withId(R.id.activity_details_neighbour_favorite_button))
                 .perform(click());
         onView(withId(R.id.activity_details_neighbour_collapsing_toolbar))
