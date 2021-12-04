@@ -23,6 +23,8 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.ClickOnItem;
@@ -56,7 +58,9 @@ public class NeighboursListTest {
     public void setUp() {
         mActivity = mActivityRule.getActivity();
         mApiService = DI.getNewInstanceApiService();
-
+        for (Neighbour neighbour: DummyNeighbourGenerator.DUMMY_NEIGHBOURS) {neighbour.setIsFavorite(false);}
+        DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(0).setIsFavorite(true);
+        DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(1).setIsFavorite(true);
         assertThat(mActivity, notNullValue());
 
     }
@@ -86,22 +90,25 @@ public class NeighboursListTest {
                 .check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, new DeleteViewAction()));
         // Then : the number of element is 11 of Neighbour tab (N°1)
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
                 .check(withItemCount(ITEMS_COUNT - 1));
         //switch on tab 2 - Favorites
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage"))).perform(swipeLeft());
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
+                .perform(swipeLeft());
         //Check tab 2 is displayed
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
                 .check(matches(isDisplayed()));
         //check the number of items displayed
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage"))).check(withItemCount(FAVORITE_ITEMS_COUNT));
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
+                .check(withItemCount(FAVORITE_ITEMS_COUNT));
         //click on delete icon of first item
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
         // Then : the number of item should be 1
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage"))).check(withItemCount(FAVORITE_ITEMS_COUNT - 1));
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
+                .check(withItemCount(FAVORITE_ITEMS_COUNT - 1));
     }
 
     @Test
@@ -143,7 +150,6 @@ public class NeighboursListTest {
 
     @Test
     public void FavoriteTabOfMyNeighbourList_shouldShowOnlyFavoriteNeighbour() {
-
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), withContentDescription("firstPage")))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(4, new ClickOnItem()));
         onView(ViewMatchers.withId(R.id.activity_details_neighbour_favorite_button))
@@ -157,7 +163,7 @@ public class NeighboursListTest {
                 .check(withItemCount(FAVORITE_ITEMS_COUNT+1));
         // When perform a click a neighbour item n° 2
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours),withContentDescription("secondPage")))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new ClickOnItem()));
+                .perform(RecyclerViewActions.actionOnItemAtPosition(2, new ClickOnItem()));
         // Then : the NeighbourDetailsActivity start
         onView(ViewMatchers.withId(R.id.activity_neighbour_details_id))
                 .check(matches(isDisplayed()));
